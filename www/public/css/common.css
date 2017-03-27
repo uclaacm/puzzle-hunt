@@ -1,0 +1,20 @@
+.button {
+    height: 40px;
+    padding: 0px 15px;
+    margin: 8px 10px;
+    border: 2px solid white;
+    line-height: 40px;
+    font-size: 1.2em;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    font-family: 'Unica One', 'Lora', serif;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: white;
+    color: #444444;
+    cursor: pointer;
+}
