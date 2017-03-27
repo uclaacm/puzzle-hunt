@@ -1,0 +1,71 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#canvas {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    background-image: url(/images/background2.jpg);
+    background-size: cover;
+}
+/**
+<link href="https://fonts.googleapis.com/css?family=Audiowide|Bangers|Bungee+Inline|Bungee+Outline|Creepster|Ewert|Fascinate+Inline|Finger+Paint|Monoton|Overlock+SC|Press+Start+2P|Rye|Squada+One|Unica+One" rel="stylesheet">
+*/
+#canvas h1 {
+    font-family: 'Monoton', sans-serif;
+    font-weight: 300;
+    color: white;
+    text-shadow: 2px 1px 1px #333333;
+    font-size: 3em;
+    text-transform: uppercase;
+    margin-bottom: 0px;
+}
+
+#canvas h2 {
+    font-weight: 300;
+    font-size: 1.3em;
+    color: white;
+}
+
+#canvas #header-image {
+    width: 40%;
+    height: 400px;
+    margin-top: 50px;
+    float: left;
+}
+
+#canvas #header-image img {
+    height: 100%;
+    width: 100%;
+    margin-left: -50px;
+    box-shadow: 3px 0px 0px #333333;
+}
+
+#canvas #header-text {
+    width: 50%;
+    float: right;
+    padding: 30px;
+    color: white;
+    text-shadow: 1px 1px 1px #333333;
+    font-family: 'Lora', sans-serif;
+}
+
+#canvas #header-text p.info {
+    color: #DDD;
+}
+
+#canvas #header-text span.emph {
+    color: white;
+}
+
+#canvas #header {
+    height: 60px;
+    width: 100%;
+    background: rgba(0,0,0,0.7);
+    box-shadow: 0px 0px 3px #333333;
+}
