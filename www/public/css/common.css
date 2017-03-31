@@ -1,20 +1,111 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Lora', sans-serif;
+}
+
+a.no-style {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.right { float: right; }
+.center { margin-left: auto; margin-right: auto; }
+.text-center { text-align: center; }
+.left { float: left; }
+.hidden { display: none; }
+.clear { clear: both; }
+
+#top-bar {
+    height: 60px;
+    width: 100%;
+    background: rgba(0,0,0,0.7);
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.5);
+}
+
+#top-bar img {
+    padding: 8px 10px;
+    height: 44px;
+    float: left;
+}
+
 .button {
     height: 40px;
     padding: 0px 15px;
     margin: 8px 10px;
-    border: 2px solid white;
     line-height: 40px;
     font-size: 1.2em;
-    color: white;
     text-transform: uppercase;
+    display: inline-block;
     letter-spacing: 2px;
     text-align: center;
     font-family: 'Unica One', 'Lora', serif;
+    color: rgb(30, 75, 135);
+    border: 2px solid rgb(30, 75, 135);
     transition: background-color 0.3s;
 }
 
-.button:hover {
-    background-color: white;
-    color: #444444;
+.button.button-selected {
+    cursor: default !important;
+}
+
+.button.button-inline {
+    margin: 0px 10px;
+}
+
+.button.button-small {
+    height: 30px;
+    line-height: 30px;
+    font-size: 1.0em;
+}
+
+.button.button-red {
+    color: #D50000;
+    border: 2px solid #D50000;
+}
+
+.button.button-white {
+    color: white;
+    border: 2px solid white;
+}
+
+.button.button-green {
+    color: #00C853;
+    border: 2px solid #00C853;
+}
+
+.button.button-gray {
+    color: #546E7A;
+    border: 2px solid #546E7A;
+}
+
+.button:hover,
+.button.button-selected:hover {
     cursor: pointer;
+    color: white;
+    background-color: rgb(30, 75, 135);
+}
+
+.button.button-red:hover,
+.button.button-red.button-selected {
+    color: white;
+    background-color: #D50000;
+}
+
+.button.button-white:hover,
+.button.button-white.button-selected {
+    color: #444444;
+    background-color: white;
+}
+
+.button.button-green:hover,
+.button.button-green.button-selected {
+    color: white;
+    background-color: #00C853;
+}
+
+.button.button-gray:hover,
+.button.button-gray.button-selected {
+    color: white;
+    background-color: #546E7A;
 }
