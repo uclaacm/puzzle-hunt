@@ -1,0 +1,319 @@
+body {
+    background-color: #F2F2F2;
+    font-family: 'Open Sans', serif;
+}
+
+#header {
+    height: 300px;
+    width: 100%;
+    background-color: rgb(30, 75, 135);
+}
+
+#header #top-bar #puzzle-hunt-title {
+    color: white;
+    font-family: 'Monoton', sans-serif;
+    line-height: 60px;
+    font-size: 1.5em;
+}
+
+#header #header-main #user-pic {
+    height: 100px;
+    width: 100px;
+    margin-top: 10px;
+    border-radius: 90px;
+    background-color: #F2F2F2;
+    border: 5px solid #F2F2F2;
+    box-shadow: 0px 0px 6px #555555;
+}
+
+#header #header-main #user-pic img {
+    height: 100%;
+    width: 100%;
+    border-radius: 90px;
+    background-size: cover;
+}
+
+#header #header-main #user-info {
+    height: 150px;
+    width: 100%;
+    text-align: center;
+}
+
+#header #header-main #user-info h1 {
+    color: white;
+    font-weight: 600;
+    font-size: 3.2em;
+    margin: 0px;
+    margin-top: 20px;
+    font-family: 'Dancing Script';
+}
+
+#header #header-main #user-info h2 {
+    color: white;
+    margin: 0px;
+    font-weight: 300;
+    font-size: 1.2em;
+    letter-spacing: 5px;
+    font-family: 'Open Sans';
+    text-transform: uppercase;
+}
+
+#navbar {
+    background-color: #E2E2E2;
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid #CCCCCC;
+    text-align: center;
+}
+
+#navbar .navitem {
+    display: inline-block;
+    text-align: center;
+    padding: 0px 20px;
+    line-height: 50px;
+    height: 50px;
+    font-weight: 300;
+    color: #333333;
+}
+
+#navbar .navitem:hover {
+    cursor: pointer;
+    height: 46px;
+    line-height: 46px; 
+    border-bottom: 4px solid rgb(30, 75, 135);
+}
+
+#navbar .navitem.selected {
+    font-weight: 600;
+    height: 46px;
+    line-height: 46px; 
+    border-bottom: 4px solid rgb(30, 75, 135);
+}
+
+.view-page {
+    margin: auto;
+    padding: 20px 40px;
+}
+
+div#problem-select {
+    margin: auto;
+    padding-bottom: 20px;
+    font-size: 0.8em;
+    text-align: center;
+}
+
+div#problem-statement {
+    border-top: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
+    max-width: 800px;
+    width: 100%;
+    padding: 20px 0px;
+    margin: 10px 0px;
+    box-sizing: border-box;
+    margin: auto;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    color: #555555;
+    font-size: 1.1em;
+    line-height: 150%;
+}
+
+div#problem-answer,
+div#join-team,
+div#create-team {
+    margin: auto;
+    width: 300px;
+    text-align: center;
+    padding-top: 20px;
+}
+
+div#team-info {
+    width: 100%;
+    max-width: 520px;
+    margin: auto;
+}
+
+div#team-info div#team-info-left {
+    border-right: 1px solid #DDDDDD;
+    width: 100%;
+    max-width: 200px;
+    padding: 0px 10px;
+}
+
+div#team-info div#team-info-right {
+    width: 100%;
+    max-width: 275px;
+}
+
+input {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 300;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    border: 2px solid #EAEAEA;
+    color: #555555;
+    outline: none;
+    transition: border 0.3s;
+}
+
+input:focus {
+    border: 2px solid #BBBBBB;
+}
+
+table#submissions-table {
+    margin: auto;
+    background-color: #FAFAFA;
+    padding: 10px;
+    border: 1px solid #E2E2E2;
+    box-shadow: 0px 0px 4px #E2E2E2;
+    border-radius: 2px;
+    border-collapse: collapse;
+}
+
+table#submissions-table thead tr td {
+    font-weight: bold;
+    font-size: 1.1em;
+    border-bottom: 3px solid #E2E2E2;
+    background-color: #F2F2F2;
+}
+
+table#submissions-table tr td {
+    padding: 15px 20px;
+    font-size: 0.9em;
+    border-bottom: 1px solid #EAEAEA;
+}
+
+table#submissions-table tr.correct td {
+    font-weight: bold;
+    background-color: #CCFF90;
+}
+
+table#leaderboard-table {
+    margin: auto;
+    background-color: #FAFAFA;
+    padding: 10px;
+    border: 1px solid #E2E2E2;
+    box-shadow: 0px 0px 4px #E2E2E2;
+    border-radius: 2px;
+    border-collapse: collapse;
+}
+
+table#leaderboard-table thead tr td {
+    font-weight: bold;
+    border-bottom: 3px solid #E2E2E2;
+    background-color: #F2F2F2;
+}
+
+table#leaderboard-table tr td {
+    padding: 10px 10px;
+    font-size: 0.9em;
+    border-bottom: 1px solid #EAEAEA;
+    text-align: center;
+}
+
+table#leaderboard-table tr td.rank,
+table#leaderboard-table tr td.team,
+table#leaderboard-table tr td.score {
+    text-align: left;
+}
+
+table#leaderboard-table tr td.team {
+    border-right: 1px solid #EAEAEA;
+}
+
+table#leaderboard-table tr td.score {
+    border-left: 1px solid #EAEAEA;
+}
+
+table#leaderboard-table tr td.correct {
+    font-weight: bold;
+    background-color: #CCFF90;
+}
+
+table#leaderboard-table tr td.incorrect {
+    background-color: #FF8A80;
+}
+
+table#team-table {
+    margin: auto;
+    width: 100%;
+    background-color: #FAFAFA;
+    padding: 10px;
+    border: 1px solid #E2E2E2;
+    box-shadow: 0px 0px 4px #E2E2E2;
+    border-radius: 2px;
+    border-collapse: collapse;
+}
+
+table#team-table thead tr td {
+    font-weight: bold;
+    font-size: 1.1em;
+    border-bottom: 3px solid #E2E2E2;
+    background-color: #F2F2F2;
+    text-align: center;
+}
+
+table#team-table thead tr td:first-child{
+    padding-right: 30px;
+}
+
+table#team-table thead tr td:last-child{
+    padding-left: 30px;
+}
+
+table#team-table tr td {
+    padding: 10px 30px;
+    font-size: 1.3em;
+    border-bottom: 1px solid #EAEAEA;
+    vertical-align: middle;
+}
+
+table#team-table tr td:first-child {
+    padding-right: 10px;
+}
+table#team-table tr td:last-child {
+    padding-left: 10px;
+}
+
+table#team-table tr td img {
+    height: 50px;
+    width: 50px;
+    background-size: cover;
+    border: 1px solid #E2E2E2;
+    border-radius: 40px;
+}
+
+p.error {
+    color: #666666;
+    font-size: 1.1em;
+    font-style: italic;
+    font-weight: 300;
+    text-align: center;
+    padding: 10px;
+}
+
+@media(max-width: 600px) {
+    table#submissions-table thead tr td {
+        font-size: 0.9em;
+    }
+
+    table#submissions-table tr td {
+        font-size: 0.8em;
+        padding: 10px 14px;
+    }
+
+    div#team-info div#team-info-left {
+        max-width: 100%;
+        float: none;
+        padding: 10px 0px;
+        border-right: 0px;
+    }
+
+    div#team-info div#team-info-right {
+        max-width: 100%;
+        float: none;
+    }
+}

@@ -1,88 +1,387 @@
 #canvas {
-    min-height: 100%;
-    width: 100%;
-    position: absolute;
-    left: 0;
-    right: 0;
-    background-image: url(/images/background2.jpg);
-    /*background-image: url(https://scontent.fsnc1-4.fna.fbcdn.net/v/t35.0-12/17670612_10203244013376712_1321092991_o.png?oh=bbc99fef463c434111a2fc30998ddc4c&oe=58DEA8BF);*/
-    background-size: cover;
+	min-height: 100%;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	background-image: url(/images/background2.jpg);
+	background-size: cover;
 }
 
 #canvas h1 {
-    font-family: 'Monoton', sans-serif;
-    font-weight: 300;
-    color: white;
-    text-shadow: 2px 1px 1px #333333;
-    font-size: 3em;
-    text-transform: uppercase;
-    margin-bottom: 0px;
+	font-family: 'Monoton', sans-serif;
+	font-weight: 300;
+	color: white;
+	text-shadow: 2px 1px 1px #333333;
+	font-size: 3em;
+	text-transform: uppercase;
+	margin-bottom: 0px;
 }
 
 #canvas h2 {
-    font-weight: 300;
-    font-size: 1.3em;
-    color: white;
+	font-weight: 300;
+	font-size: 1.3em;
+	color: white;
 }
 
 #canvas #header-image {
-    width: 40%;
-    height: 400px;
-    margin-top: 50px;
-    float: left;
-}
-
-#canvas #header-image img {
-    height: 100%;
-    width: 100%;
-    margin-left: -50px;
-    box-shadow: 3px 0px 0px #333333;
+	width: 35%;
+	height: 400px;
+	margin-top: 50px;
+	float: left;
 }
 
 #canvas #header-text {
-    width: 50%;
-    float: right;
-    padding: 30px;
-    margin-top: 80px;
-    color: white;
-    text-shadow: 1px 1px 1px #333333;
+	width: 55%;
+	float: right;
+	padding: 30px;
+	margin-top: 80px;
+	color: white;
+	text-shadow: 1px 1px 1px #333333;
 }
 
 #canvas #header-text p.info {
-    color: #DDD;
+	color: #DDD;
 }
 
 #canvas #header-text span.emph {
-    color: white;
+	color: white;
 }
 
 @media (max-width: 900px) {
-    #canvas #header-text {
-        float: none;
-        margin: auto;
-        width: 100%;
-        box-sizing: border-box;
-    }
+	#canvas #header-text {
+		float: none;
+		margin: auto;
+		width: 100%;
+		box-sizing: border-box;
+	}
 
-    #canvas #header-image {
-        float: none;
-        margin: auto;
-        width: 100%;
-        height: 300px;
-        max-width: 500px;
-    }
+	#canvas #header-image {
+		float: none;
+		margin: auto;
+		width: 100%;
+		height: 300px;
+		max-width: 500px;
+	}
 }
 
 @media (max-width: 520px) {
-    #canvas h1 {
-        font-size: 2.4em;
-    }
+	#canvas h1 {
+		font-size: 2.4em;
+	}
 
-    #canvas h2 {
-        font-size: 1.1em;
-    }
+	#canvas h2 {
+		font-size: 1.1em;
+	}
 
-    #canvas p.info {
-        font-size: 0.9em;
-    }
+	#canvas p.info {
+		font-size: 0.9em;
+	}
+}
+
+/*
+ animation
+ */
+
+.container {
+	width: 200px;
+	height: 200px;
+	position: relative;
+	margin: 70px auto 40px;
+	margin-top: 120px;
+	-webkit-perspective: 2000px;
+	background: rgba(0,0,0,0.3);
+	border-radius: 100px/100px;
+	box-shadow: 0 70px 100px rgba(0,0,0,1.0);  
+}
+
+#cube {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	-webkit-transform-style: preserve-3d;
+	-webkit-transform: translateZ( -100px );
+	-webkit-animation: spinCubeWebkit 9s infinite  linear;
+}
+#cube .figure{
+	width: 196px;
+	height: 196px;
+	display: block;
+	background: black;
+	position: absolute;
+	border: 2px solid black;
+	opacity:0.8;
+}
+#cube .front  { 
+	-webkit-transform: rotateY(   0deg ) translateZ( 100px ); 
+	background: black;
+}
+#cube .back   { 
+	-webkit-transform: rotateX( 180deg ) translateZ( 100px ); 
+	background: black;
+}
+#cube .right  { 
+	-webkit-transform: rotateY(  90deg ) translateZ( 100px ); 
+	background: black;
+}
+#cube .left   { 
+	-webkit-transform: rotateY( -90deg ) translateZ( 100px ); 
+	background: black;
+}
+#cube .top    { 
+	-webkit-transform: rotateX(  90deg ) translateZ( 100px ); 
+	background: black;
+}
+#cube .bottom { 
+	-webkit-transform: rotateX( -90deg ) translateZ( 100px ); 
+	background: black;
+}
+
+@-webkit-keyframes spinCubeWebkit {
+	0% { -webkit-transform: translateZ( -100px ) rotateX(   0deg ) rotateY(   0deg ); }
+  100% { -webkit-transform: translateZ( -100px ) rotateX( 360deg ) rotateY( 360deg ); }
+}
+
+.rubik_cube_face {
+	text-align: center;
+	width:200px;
+	height:200px;
+}
+.rubik_cube_face span {
+	display: inline-block;
+	border:1px solid black;
+	float:left;
+	vertical-align: middle;
+	width: 28%;
+	height: 28%;
+	margin: 2% 2%;
+	background: black;
+	border-radius: 3px;
+}
+.rubik_cube_face span:nth-of-type(1) {
+	animation-name: color_change1;
+	  animation-duration: 2s;
+	  animation-iteration-count: infinite;
+	  animation-direction: alternate;
+}
+@-webkit-keyframes color_change1 {
+	from { background-color: rgb(113,77,70); }
+	to { background-color: rgb(26,90,50); }
+}
+@-moz-keyframes color_change1 {
+	from { background-color: rgb(113,77,70); }
+	to { background-color: rgb(26,90,50); }
+}
+@-ms-keyframes color_change1 {
+	from { background-color: rgb(113,77,70); }
+	to { background-color: rgb(26,90,50); }
+}
+@-o-keyframes color_change1 {
+	from { background-color: rgb(113,77,70); }
+	to { background-color: rgb(26,90,50); }
+}
+@keyframes color_change1 {
+	from { background-color: rgb(113,77,70); }
+	to { background-color: rgb(26,90,50); }
+}
+
+.rubik_cube_face span:nth-of-type(2) {
+	animation-name: color_change2;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
+@-webkit-keyframes color_change2 {
+  from { background-color: rgb(190,190,191); }
+  to { background-color: rgb(186,125,49); }
+}
+@-moz-keyframes color_change2 {
+  from { background-color: rgb(190,190,191); }
+  to { background-color: rgb(186,125,49); }
+}
+@-ms-keyframes color_change2 {
+  from { background-color: rgb(190,190,191); }
+  to { background-color: rgb(186,125,49); }
+}
+@-o-keyframes color_change2 {
+  from { background-color: rgb(190,190,191); }
+  to { background-color: rgb(186,125,49); }
+}
+@keyframes color_change2 {
+  from { background-color: rgb(190,190,191); }
+  to { background-color: rgb(186,125,49); }
+}
+
+.rubik_cube_face span:nth-of-type(3) {
+	animation-name: color_change3;
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
+@-webkit-keyframes color_change3 {
+  from { background-color: rgb(27,45,90); }
+  to { background-color: rgb(93,133,201); }
+}
+@-moz-keyframes color_change3 {
+  from { background-color: rgb(27,45,90); }
+  to { background-color: rgb(93,133,201); }
+}
+@-ms-keyframes color_change3 {
+  from { background-color: rgb(27,45,90); }
+  to { background-color: rgb(93,133,201); }
+}
+@-o-keyframes color_change3 {
+  from { background-color: rgb(27,45,90); }
+  to { background-color: rgb(93,133,201); }
+}
+@keyframes color_change3 {
+  from { background-color: rgb(27,45,90); }
+  to { background-color: rgb(93,133,201); }
+}
+
+.rubik_cube_face span:nth-of-type(4) {
+	animation-name: color_change4;
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
+@-webkit-keyframes color_change4 {
+  from { background-color: rgb(93,133,201);}
+  to { background-color: rgb(27,45,90);  }
+}
+@-moz-keyframes color_change4 {
+  from { background-color: rgb(93,133,201); }
+  to { background-color: rgb(27,45,90); }
+}
+@-ms-keyframes color_change4 {
+  from { background-color: rgb(93,133,201); }
+  to { background-color: rgb(27,45,90); }
+}
+@-o-keyframes color_change4 {
+  from { background-color: rgb(93,133,201); }
+  to { background-color: rgb(27,45,90);}
+}
+@keyframes color_change4 {
+  from { background-color: rgb(93,133,201);}
+  to { background-color: rgb(27,45,90);  }
+}
+
+.rubik_cube_face span:nth-of-type(5) {
+	animation-name: middle;
+	animation-duration: 1.5s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
+@-webkit-keyframes color_change5 {
+  from { background-color: rgb(158,139,120);}
+  to { background-color: rgb(191,84,84);  }
+}
+@-moz-keyframes color_change5 {
+  from { background-color: rgb(158,139,120); }
+  to { background-color: rgb(191,84,84); }
+}
+@-ms-keyframes color_change5 {
+  from { background-color: rgb(158,139,120); }
+  to { background-color: rgb(191,84,84); }
+}
+@-o-keyframes color_change5 {
+  from { background-color: rgb(158,139,120); }
+  to { background-color: rgb(191,84,84);}
+}
+@keyframes color_change5 {
+  from { background-color: rgb(158,139,120);}
+  to { background-color: rgb(191,84,84);  }
+}
+
+.rubik_cube_face span:nth-of-type(6) {
+	 animation-name: color_change5;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+.rubik_cube_face span:nth-of-type(7) {
+	animation-name: color_change7;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
+@-webkit-keyframes color_change7 {
+  from { background-color: rgb(186,125,49);  }
+  to { background-color: rgb(190,190,191);}
+}
+@-moz-keyframes color_change7 {
+  from { background-color: rgb(186,125,49); }
+  to { background-color: rgb(190,190,191); }
+}
+@-ms-keyframes color_change7 {
+  from { background-color: rgb(186,125,49); }
+  to { background-color: rgb(190,190,191); }
+}
+@-o-keyframes color_change7 {
+  from { background-color: rgb(186,125,49); }
+  to { background-color: rgb(190,190,191); }
+}
+@keyframes color_change7 {
+  from { background-color: rgb(186,125,49);  }
+  to { background-color: rgb(190,190,191);}
+}
+
+.rubik_cube_face span:nth-of-type(8) {
+	 animation-name: color_change8;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
+@-webkit-keyframes color_change8 {
+  from { background-color: rgb(26,90,50); }
+  to { background-color:  rgb(113,77,70);}
+}
+@-moz-keyframes color_change8 {
+  from { background-color: rgb(26,90,50);}
+  to { background-color: rgb(113,77,70);  }
+}
+@-ms-keyframes color_change8 {
+  from { background-color: rgb(26,90,50);}
+  to { background-color: rgb(113,77,70); }
+}
+@-o-keyframes color_change8 {
+  from { background-color: rgb(26,90,50);}
+  to { background-color: rgb(113,77,70);  }
+}
+@keyframes color_change8 {
+  from { background-color: rgb(26,90,50); }
+  to { background-color: rgb(113,77,70); }
+}
+
+.rubik_cube_face span:nth-of-type(9) {
+	 animation-name: color_change9;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+@-webkit-keyframes color_change9 {
+  from { background-color: rgb(167,172,183); }
+  to { background-color:  rgb(169,116,66);}
+}
+@-moz-keyframes color_change9 {
+  from { background-color: rgb(167,172,183);}
+  to { background-color: rgb(169,116,66);  }
+}
+@-ms-keyframes color_change9 {
+  from { background-color: rgb(167,172,183);}
+  to { background-color: rgb(169,116,66); }
+}
+@-o-keyframes color_change9 {
+  from { background-color: rgb(167,172,183);}
+  to { background-color: rgb(169,116,66);  }
+}
+@keyframes color_change9 {
+  from { background-color: rgb(167,172,183); }
+  to { background-color: rgb(169,116,66); }
 }

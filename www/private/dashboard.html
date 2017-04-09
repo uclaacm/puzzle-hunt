@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html ng-app="PuzzleHuntApp">
+    <head>
+        <title>ACM Puzzle Hunt | Dashboard</title>
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Monoton|Open+Sans:300,400,600|Dancing+Script|Unica+One|Lora:400,400i" />
+        <link rel="stylesheet" type="text/css" href="/css/common.css" />
+        <link rel="stylesheet" type="text/css" href="/css/dashboard.css" />
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.3/angular.min.js"></script>
+        <script type="text/javascript" src="/js/dashboard.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body ng-controller="AppController">
+        <div id="header">
+            <div id="top-bar">
+                <div class="left"><a href="http://uclaacm.com" target="_BLANK"><img src="/images/acm.png" /></a></div>
+                <div class="left" id="puzzle-hunt-title">Puzzle Hunt</div>
+                <a href="/auth/logout" class="no-style"><div class="button button-white right" id="sign-out-btn">Sign Out</div></a>
+            </div>
+            <div id="header-main">
+                <div class="center" id="user-pic"><img ng-src="{{user.profilePicture}}" /></div>
+                <div class="center" id="user-info">
+                    <h1 id="user-name" ng-bind="user.name"></span>
+                    <h2 id="user-team" ng-bind="team ? team.name : ''"></span>
+                </div>
+            </div>
+        </div>
+
+        <div id="navbar">
+            <div class="navitem" ng-class="{ selected: currentPage == page.PUZZLES }" ng-click="changePage(page.PUZZLES)">Puzzles</div>
+            <div class="navitem" ng-class="{ selected: currentPage == page.SUBMISSIONS }" ng-click="changePage(page.SUBMISSIONS)">Submissions</div>
+            <div class="navitem" ng-class="{ selected: currentPage == page.LEADERBOARD }" ng-click="changePage(page.LEADERBOARD)">Leaderboard</div>
+            <div class="navitem" ng-class="{ selected: currentPage == page.TEAM }" ng-click="changePage(page.TEAM)">Team</div>
+        </div>
+
+        <div class="view-page" id="puzzles" ng-class="{ hidden: currentPage != page.PUZZLES }">
+            <div ng-if="puzzles.length && !puzzleErrorMsg">
+                <div id="problem-select">
+                    <label for="problem">Select a puzzle: 
+                    <select name="problem-sel" ng-model="selectedPuzzle">
+                        <option ng-repeat="puzzle in puzzles" value="{{$index}}">{{puzzle.shortcode}}: {{puzzle.title}}</option>
+                    </select>
+                </div>
+
+                <div id="problem-statement" ng-if="selectedPuzzle > -1" ng-bind="puzzles[selectedPuzzle].text"></div>
+
+                <div id="problem-answer" ng-if="selectedPuzzle > -1">
+                    <div class="text-center" ng-if="puzzleAnsErrorMsg">
+                        <i ng-bind="puzzleAnsErrorMsg"></i><br /><br />
+                    </div>
+                    <input type="text" id="answer-input" ng-model="problemAnswer" placeholder="Enter solution here..." /><br />
+                    <div ng-if="!submitting && !submitted" class="button" ng-click="submitAnswer(selectedPuzzle, problemAnswer)">Submit</div>
+                    <div ng-if="submitting" class="button button-gray button-selected">Submitting...</div>
+                    <div ng-if="submitted" class="button button-green button-selected">Submitted!</div>
+                    <div class="button button-red">Clear</div>
+                </div>
+            </div>
+            <div class="text-center" ng-if="puzzleErrorMsg">
+                <i ng-bind="puzzleErrorMsg"></i><br /><br />
+            </div>
+        </div>
+
+        <div class="view-page" id="submissions" ng-class="{ hidden: currentPage != page.SUBMISSIONS }">
+            <div class="text-center" ng-if="submissionsGetError">
+                <i ng-bind="submissionsGetError"></i><br /><br />
+            </div>
+            <table id="submissions-table" ng-if="submissions.length && !submissionsGetError">
+                <thead><tr><td>Puzzle</td><td>Timestamp</td><td>Submission</td><td>Judgement</td></tr></thead>
+                <tr ng-repeat="submission in submissions | orderBy: timestamp" ng-class="{ correct: submission.correct }">
+                    <td ng-bind="submission.puzzle"></td>
+                    <td ng-bind="submission.timestamp"></td>
+                    <td ng-bind="submission.answer"></td>
+                    <td ng-bind="submission.correct ? 'Correct' : 'Incorrect'"></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="view-page" id="leaderboard" ng-class="{ hidden: currentPage != page.LEADERBOARD }">
+            <table id="leaderboard-table">
+                <thead><tr>
+                    <td class="rank">#</td>
+                    <td class="team">Team</td>
+                    <td ng-repeat="header in leaderboard.header" ng-bind="header"></td>
+                    <td class="score">Score</td>
+                </tr></thead>
+                <tr ng-repeat="team in leaderboard.scoreboard">
+                    <td class="rank" ng-bind="$index+1"></td>
+                    <td class="team" ng-bind="team.team"></td>
+                    <td ng-repeat="score in team.scores" ng-class="{ correct: score.correct, incorrect: !score.correct && score.attempts > 0 }">
+                        <span ng-if="score.attempts == 0">&dash;<br/></span>
+                        <span ng-if="score.attempts > 0">
+                            {{score.correct ? '+' : '-'}}{{score.attempts}}<br />
+                            ({{score.timestamp}})
+                        </span>
+                    </td>
+                    <td class="score" ng-bind="team.totalScore"></td>
+                </tr>
+            </table>
+            <div class="text-center">
+                <!--<div ng-if="!loadingLeaderboard" class="button" ng-click="getLeaderboard()">Refresh</div>-->
+                <!--<div ng-if="loadingLeaderboard" class="button button-gray button-selected">Loading...</div><br />-->
+                <span style="line-height: 40px; padding: 10px 0px; font-size: 0.8em;"><b>Last Updated: </b><span ng-bind="lastUpdatedLeaderboard"></span></span><br />
+            </div>
+        </div>
+
+        <div class="view-page" id="teams" ng-class="{ hidden: currentPage != page.TEAM }">
+            <div class="text-center" ng-class="{ hidden: currentTeamState != teamState.NO_TEAM }">
+                <div class="button" ng-click="changeTeamState(teamState.CREATE_TEAM)">Create Team</div>
+                <div class="button" ng-click="changeTeamState(teamState.JOIN_TEAM)">Join Team</div>
+            </div>
+            <div class="text-center" ng-class="{ hidden: currentTeamState != teamState.JOIN_TEAM }">
+                <div id="join-team">
+                    <input type="text" placeholder="Enter team ID here..." ng-model="joinTeamInput" /><br />
+                    <div class="button" ng-click="joinTeam(joinTeamInput)">Join</div> <div class="button button-red" ng-click="changeTeamState(teamState.NO_TEAM)">Cancel</div>
+                    <p class="error" ng-bind="teamErrorMsg"></p>
+                </div>
+            </div>
+            <div class="text-center" ng-class="{ hidden: currentTeamState != teamState.CREATE_TEAM }">
+                <div id="create-team">
+                    <input type="text" placeholder="Enter team name here..." ng-model="createTeamInput" /><br />
+                    <div class="button" ng-click="createTeam(createTeamInput)">Create</div> <div class="button button-red" ng-click="changeTeamState(teamState.NO_TEAM)">Cancel</div>
+                    <p class="error" ng-bind="teamErrorMsg"></p>
+                </div>
+            </div>
+            <div class="text-center" ng-class="{ hidden: currentTeamState != teamState.LEAVE_TEAM }">
+                <div id="leave-team">
+                    <i>Are you sure you want to leave your team?</i><br /><br />
+                    <div class="button button-red" ng-click="leaveTeam()">Yes</div> <div class="button" ng-click="changeTeamState(teamState.TEAM)">No</div>
+                    <p class="error" ng-bind="teamErrorMsg"></p>
+                </div>
+            </div>
+            <div id="team-info" ng-class="{ hidden: currentTeamState != teamState.TEAM }">
+                <div class="left text-center" id="team-info-left">
+                    <span id="team-name" style="text-align:center;font-size:2.0em;text-transform:uppercase;font-weight:600;" ng-bind="team.name"></span><br /><br />
+                    <div class="button button-red" ng-click="changeTeamState(teamState.LEAVE_TEAM)">Leave Team</div>
+                </div>
+                <div class="right" id="team-info-right">
+                    <table id="team-table">
+                        <thead><tr><td colspan=2>Members</td></tr></thead>
+                        <tr ng-repeat="member in team.members | orderBy: member.name">
+                            <td><img ng-src="{{member.profilePicture}}" /></td>
+                            <td ng-bind="member.name"></td>
+                        </tr>
+                    </table><br />
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </body>
+</html>
