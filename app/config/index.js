@@ -16,8 +16,8 @@ if (production) {
 			uri: process.env.REDIS_URL
 		},
 		contest: {
-			start: process.env.CONTEST_START,
-			end: process.env.CONTEST_END
+			start: new Date(process.env.CONTEST_START),
+			end: new Date(process.env.CONTEST_END)
 		}
 	};
 } else { 
