@@ -59,8 +59,6 @@ router.get('/facebook', passport.authenticate('facebook', { scope: [ ] }));
 router.get('/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/' }),
 	(req, res) => {
 		// success
-		console.log("success");
-		console.log(req.user);
 		res.redirect('/dashboard');
 	},
 	(err, req, res, next) => {
