@@ -13,7 +13,7 @@ if (production) {
 		},
 		session: {
 			secret: process.env.SESSION_SECRET,
-			uri: process.env.REDIS_URI
+			uri: process.env.REDIS_URL
 		},
 		contest: {
 			start: process.env.CONTEST_START,
