@@ -79,7 +79,7 @@ router.post('/join', (req, res) => {
         if (!team)
             throw "No such team exists.";
         if (team.memberCount >= 4)
-            throw "This team already has four people.";
+            throw "This team already has the maximum number of participants.";
         return team.incrementMemberCount();
     }).then(team => team.getPublicProfile()).then(team => {
         return req.user.update({
