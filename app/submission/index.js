@@ -22,8 +22,8 @@ router.route('/').all((req, res, next) => {
             let puzzleMap = {};
             for (let puzzle of puzzles)
                 puzzleMap[puzzle.id] = puzzle;
-            
-            res.json({ submissions: submissions.map(s => {
+
+            res.json({ submissions: submissions.filter(s => puzzleMap.hasOwnProperty(s.puzzleId)).map(s => {
                 return {
                     puzzle: puzzleMap[s.puzzleId].shortcode,
                     timestamp: s.timestamp,
