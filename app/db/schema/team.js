@@ -38,6 +38,9 @@ let Team = db.define('team', {
 		},
 		decrementMemberCount: function() {
 			return this.decrement('memberCount');
+		},
+		incrementMemberCount: function() {
+			return this.increment('memberCount');
 		}
 	}
 });
