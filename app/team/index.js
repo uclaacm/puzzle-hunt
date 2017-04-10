@@ -75,7 +75,7 @@ router.post('/join', (req, res) => {
     if (!req.body || !req.body.team || !req.body.team.id)
         return res.json({ team: null, error: "Malformed request." });
     
-    Team.findById(req.body.id).then(team => {
+    Team.findById(req.body.team.id).then(team => {
         if (!team)
             throw "No such team exists.";
         if (team.memberCount >= 4)
