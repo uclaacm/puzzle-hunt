@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const config = require('../../config');
 
-let db = new Sequelize(config.db.uri);
+let db = new Sequelize(config.db.uri, { logging: false });
 
 let Submission= db.define('submission', {
 	id: {

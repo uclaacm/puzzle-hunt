@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const config = require('../config');
 
-let db = new Sequelize(config.db.uri);
+let db = new Sequelize(config.db.uri, { logging: false });
 
 let User = require('./schema/user.js');
 let Puzzle = require('./schema/puzzle.js');
