@@ -1,5 +1,9 @@
 var app = angular.module('PuzzleHuntApp', []);
 
+app.config(function($sceProvider) {
+    $sceProvider.enabled(false);
+});
+
 app.controller('AppController', ['$scope', '$http', function($scope, $http) {
     $scope.page = {
         PUZZLES : 1,
@@ -19,7 +23,11 @@ app.controller('AppController', ['$scope', '$http', function($scope, $http) {
     $scope.currentPage = 0;
     $scope.currentTeamState = $scope.teamState.NO_TEAM;
 
-    $scope.problemAnswer = "";
+    $scope.puzzle = {
+        selected: -1,
+        answer: ''
+    };
+
     $scope.submitting = false;
     $scope.submitted = false;
 
@@ -36,8 +44,6 @@ app.controller('AppController', ['$scope', '$http', function($scope, $http) {
 
     $scope.lastUpdatedLeaderboard = null;
     $scope.loadingLeaderboard = false;
-
-    $scope.selectedPuzzle = -1;
 
     $scope.changePage = function(page) {
         $scope.currentPage = page;
@@ -177,15 +183,15 @@ app.controller('AppController', ['$scope', '$http', function($scope, $http) {
         });
     };
 
-    $scope.submitAnswer = function(puzzle, answer) {
-        if (puzzle > -1) {
+    $scope.submitAnswer = function() {
+        if ($scope.puzzle.selected > -1 && $scope.puzzle.answer) {
             $scope.submitting = true;
-            $http.post('/submission', { submission: { puzzleId: $scope.puzzles[puzzle].id, answer: answer }}).then(function(response) {
+            $http.post('/submission', { submission: { puzzleId: $scope.puzzles[$scope.puzzle.selected].id, answer: $scope.puzzle.answer }}).then(function(response) {
                 if (!response || response.status !== 200)
                     throw "Invalid response";
                 if (response.data.error)
                     throw response.data.error;
-                document.getElementById('answer-input').value = "";
+                $scope.puzzle.answer = "";
                 $scope.submitting = false;
                 $scope.submitted = true;
                 setTimeout(function() {

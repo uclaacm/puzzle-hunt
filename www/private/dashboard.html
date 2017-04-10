@@ -36,19 +36,19 @@
             <div ng-if="puzzles.length && !puzzleErrorMsg">
                 <div id="problem-select">
                     <label for="problem">Select a puzzle: 
-                    <select name="problem-sel" ng-model="selectedPuzzle">
+                    <select name="problem-sel" ng-model="puzzle.selected">
                         <option ng-repeat="puzzle in puzzles" value="{{$index}}">{{puzzle.shortcode}}: {{puzzle.title}}</option>
                     </select>
                 </div>
 
-                <div id="problem-statement" ng-if="selectedPuzzle > -1" ng-bind="puzzles[selectedPuzzle].text"></div>
+                <div id="problem-statement" ng-if="puzzle.selected > -1" ng-bind-html="puzzles[puzzle.selected].text"></div>
 
-                <div id="problem-answer" ng-if="selectedPuzzle > -1">
+                <div id="problem-answer" ng-if="puzzle.selected > -1">
                     <div class="text-center" ng-if="puzzleAnsErrorMsg">
                         <i ng-bind="puzzleAnsErrorMsg"></i><br /><br />
                     </div>
-                    <input type="text" id="answer-input" ng-model="problemAnswer" placeholder="Enter solution here..." /><br />
-                    <div ng-if="!submitting && !submitted" class="button" ng-click="submitAnswer(selectedPuzzle, problemAnswer)">Submit</div>
+                    <input type="text" id="answer-input" ng-model="puzzle.answer" placeholder="Enter solution here..." /><br />
+                    <div ng-if="!submitting && !submitted" class="button" ng-click="submitAnswer()">Submit</div>
                     <div ng-if="submitting" class="button button-gray button-selected">Submitting...</div>
                     <div ng-if="submitted" class="button button-green button-selected">Submitted!</div>
                     <div class="button button-red">Clear</div>
@@ -96,8 +96,6 @@
                 </tr>
             </table>
             <div class="text-center">
-                <!--<div ng-if="!loadingLeaderboard" class="button" ng-click="getLeaderboard()">Refresh</div>-->
-                <!--<div ng-if="loadingLeaderboard" class="button button-gray button-selected">Loading...</div><br />-->
                 <span style="line-height: 40px; padding: 10px 0px; font-size: 0.8em;"><b>Last Updated: </b><span ng-bind="lastUpdatedLeaderboard"></span></span><br />
             </div>
         </div>
@@ -130,7 +128,8 @@
             </div>
             <div id="team-info" ng-class="{ hidden: currentTeamState != teamState.TEAM }">
                 <div class="left text-center" id="team-info-left">
-                    <span id="team-name" style="text-align:center;font-size:2.0em;text-transform:uppercase;font-weight:600;" ng-bind="team.name"></span><br /><br />
+                    <span id="team-name" style="text-align:center;font-size:2.0em;text-transform:uppercase;font-weight:600;" ng-bind="team.name"></span><br />
+                    <small>Team ID: <span ng-bind="team.id"></span></small><br />
                     <div class="button button-red" ng-click="changeTeamState(teamState.LEAVE_TEAM)">Leave Team</div>
                 </div>
                 <div class="right" id="team-info-right">

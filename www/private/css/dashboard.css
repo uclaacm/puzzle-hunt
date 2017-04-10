@@ -112,10 +112,23 @@ div#problem-statement {
     box-sizing: border-box;
     margin: auto;
     font-family: 'Lora', serif;
-    font-style: italic;
+    /*font-style: italic;*/
     color: #555555;
     font-size: 1.1em;
     line-height: 150%;
+}
+
+div#problem-statement img {
+    max-width: 100%;
+    margin: auto;
+    text-align: center;
+    display: block;
+    box-shadow: 0px 0px 3px #E2E2E2;
+}
+
+div#problem-statement audio {
+    margin: auto;
+    width: 200px;
 }
 
 div#problem-answer,
